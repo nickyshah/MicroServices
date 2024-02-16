@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B8294C21-5C4B-4670-89ED-66A9347822CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Services.CouponApi", "Mango.Services.Api\Mango.Services.CouponApi.csproj", "{FF9BB51E-DE77-46E0-9BDB-04E29D1BC853}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.CouponApi", "Mango.Services.Api\Mango.Services.CouponApi.csproj", "{FF9BB51E-DE77-46E0-9BDB-04E29D1BC853}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
