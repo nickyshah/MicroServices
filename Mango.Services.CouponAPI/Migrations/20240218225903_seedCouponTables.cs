@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Mango.Services.CouponApi.Migrations
+namespace Mango.Services.CouponAPI.Migrations
 {
     /// <inheritdoc />
     public partial class seedCouponTables : Migration
@@ -14,7 +14,7 @@ namespace Mango.Services.CouponApi.Migrations
         {
             migrationBuilder.InsertData(
                 table: "Coupons",
-                columns: new[] { "CouponId", "CouponCode", "DiscountAmount", "MinimumAmount" },
+                columns: new[] { "CouponId", "CouponCode", "DiscountAmount", "MinAmount" },
                 values: new object[,]
                 {
                     { 1, "10OFF", 10.0, 20 },

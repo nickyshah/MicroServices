@@ -1,20 +1,21 @@
-﻿using Mango.Services.CouponApi.Data;
-using Mango.Services.CouponApi.Models;
+﻿using Mango.Services.CouponAPI.Data;
+using Mango.Services.CouponAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Mango.Services.CouponApi.Controllers
+namespace Mango.Services.CouponAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class CouponAPIController : ControllerBase
     {
-        private readonly ApplicationDbContext _db;
+        private readonly AppDbContext _db;
 
-        public CouponAPIController(ApplicationDbContext db)
+        public CouponAPIController(AppDbContext db)
         {
             _db = db;
         }
 
+        [HttpGet]
         public object Get()
         {
             try
@@ -28,6 +29,5 @@ namespace Mango.Services.CouponApi.Controllers
             }
             return null;
         }
-
     }
 }

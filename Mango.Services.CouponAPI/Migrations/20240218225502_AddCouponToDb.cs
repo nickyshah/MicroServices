@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Mango.Services.CouponApi.Migrations
+namespace Mango.Services.CouponAPI.Migrations
 {
     /// <inheritdoc />
     public partial class AddCouponToDb : Migration
@@ -18,7 +18,7 @@ namespace Mango.Services.CouponApi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CouponCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DiscountAmount = table.Column<double>(type: "float", nullable: false),
-                    MinimumAmount = table.Column<int>(type: "int", nullable: false)
+                    MinAmount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
