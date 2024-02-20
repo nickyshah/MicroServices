@@ -1,6 +1,10 @@
-﻿namespace Mango.Web.Service.IService
+﻿using Mango.Web.Models;
+
+namespace Mango.Web.Service.IService
 {
-    public class IBaseService
+    public interface IBaseService
     {
+        Task<ResponseDto?> SendAsync(RequestDto requestDto);
+
     }
 }
