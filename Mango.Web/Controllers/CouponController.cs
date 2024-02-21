@@ -31,6 +31,7 @@ namespace Mango.Web.Controllers
             return View();
         }
 
+
         [HttpPost]
         public async Task<IActionResult> CouponCreate(CouponDto model)
         {
@@ -43,8 +44,8 @@ namespace Mango.Web.Controllers
                     return RedirectToAction(nameof(CouponIndex));
                 }
             }
-
             return View(model);
         }
+
     }
 }
