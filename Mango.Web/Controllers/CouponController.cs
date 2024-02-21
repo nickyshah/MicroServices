@@ -47,5 +47,17 @@ namespace Mango.Web.Controllers
             return View(couponDto);
         }
 
+        public async Task<IActionResult> CouponDelete(int couponId)
+        {
+            ResponseDto? response = await _couponService.GetCouponByIdAsync(couponId);
+
+            if (response != null && response.IsSuccess)
+            {
+                CouponDto? model = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(response.Result));
+                return View(model);
+            }
+            return NotFound();
+        }
+
     }
 }
