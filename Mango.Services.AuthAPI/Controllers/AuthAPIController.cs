@@ -18,10 +18,10 @@ namespace Mango.Services.AuthAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegistrationRequestDto registrationRequestDto)
+        public async Task<IActionResult> Register([FromBody] RegistrationRequestDto model)
         {
-            var errorMessage = await _authServices.Register(registrationRequestDto);
-            if (errorMessage != null)
+            var errorMessage = await _authServices.Register(model);
+            if (!string.IsNullOrEmpty(errorMessage))
             {
                 _response.IsSuccess = false;
                 _response.Message = errorMessage;
