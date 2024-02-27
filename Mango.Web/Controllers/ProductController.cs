@@ -88,6 +88,7 @@ namespace Mango.Web.Controllers
             }
             return View(productDto);
         }
+
         public async Task<IActionResult> ProductEdit(int productId)
         {
             ResponseDto? response = await _productService.GetProductByIdAsync(productId);
@@ -107,11 +108,11 @@ namespace Mango.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ProductEdit(ProductDto productDto)
         {
-            ResponseDto? response = await _productService.DeleteProductsAsync(productDto.ProductId);
+            ResponseDto? response = await _productService.UpdateProductsAsync(productDto);
 
             if (response != null && response.IsSuccess)
             {
-                TempData["success"] = "Product Deleted Successfully!!";
+                TempData["success"] = "Product Updated Successfully!!";
                 return RedirectToAction(nameof(ProductIndex));
             }
             else
