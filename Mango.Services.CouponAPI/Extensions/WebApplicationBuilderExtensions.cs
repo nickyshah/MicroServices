@@ -8,13 +8,14 @@ namespace Mango.Services.CouponAPI.Extensions
     {
         public static WebApplicationBuilder AddAppAuthentication(this WebApplicationBuilder builder)
         {
-            var settingSection = builder.Configuration.GetSection("ApiSettings");
+            var settingsSection = builder.Configuration.GetSection("ApiSettings");
 
-            var secret = builder.Configuration.GetValue<string>("Secret");
-            var issuer = builder.Configuration.GetValue<string>("Issuer");
-            var audience = builder.Configuration.GetValue<string>("Audience");
+            var secret = settingsSection.GetValue<string>("Secret");
+            var issuer = settingsSection.GetValue<string>("Issuer");
+            var audience = settingsSection.GetValue<string>("Audience");
 
             var key = Encoding.ASCII.GetBytes(secret);
+
 
             builder.Services.AddAuthentication(x =>
             {
@@ -28,10 +29,11 @@ namespace Mango.Services.CouponAPI.Extensions
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = true,
                     ValidIssuer = issuer,
-                    ValidateAudience = true,
-                    ValidAudience = audience
+                    ValidAudience = audience,
+                    ValidateAudience = true
                 };
             });
+
             return builder;
         }
     }
