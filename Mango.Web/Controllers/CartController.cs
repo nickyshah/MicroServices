@@ -28,7 +28,7 @@ namespace Mango.Web.Controllers
             ResponseDto? response = await _cartService.RemoveCartAsync(cartDetailsId);
             if (response != null && response.IsSuccess)
             {
-                TempData["success"] = "Cart Updated Successfully";
+                TempData["success"] = "Item Deleted Successfully";
                 return RedirectToAction(nameof(CartIndex));
             }
             return View();
@@ -40,7 +40,20 @@ namespace Mango.Web.Controllers
             ResponseDto? response = await _cartService.ApplyCouponAsync(cartDto);
             if (response != null && response.IsSuccess)
             {
-                TempData["success"] = "Cart Updated Successfully";
+                TempData["success"] = "Coupon Added Successfully";
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveCoupon(CartDto cartDto)
+        {
+            cartDto.CartHeader.CouponCode = "";
+            ResponseDto? response = await _cartService.ApplyCouponAsync(cartDto);
+            if (response != null && response.IsSuccess)
+            {
+                TempData["success"] = "Coupon Removed Successfully";
                 return RedirectToAction(nameof(CartIndex));
             }
             return View();
