@@ -86,6 +86,22 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
             return _response;
         }
 
+        [HttpPost("EmailCartRequest")]
+        public async Task<object> EmailCartRequest([FromBody] CartDto cartDto)
+        {
+            try
+            {
+
+                _response.Result = true;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = true;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
+
         [HttpPost("RemoveCoupon")]
         public async Task<object> RemoveCoupon([FromBody] CartDto cartDto)
         {
