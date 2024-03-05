@@ -18,7 +18,7 @@ namespace Mango.Web.Controllers
         [Authorize]
         public async Task<IActionResult> CartIndex()
         {
-            return View(await LoadCartDtoBasedOnLoggedUser());
+            return View(await LoadCartDtoBasedOnLoggedInUser());
         }
 
 
@@ -49,7 +49,10 @@ namespace Mango.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> EmailCart(CartDto cartDto)
         {
-            ResponseDto? response = await _cartService.EmailCart(cartDto);
+            CartDto cart = await LoadCartDtoBasedOnLoggedInUser();
+            cart.CartHeader.Email = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Email)?.FirstOrDefault()?.Value;
+
+            ResponseDto? response = await _cartService.EmailCart(cart);
             if (response != null && response.IsSuccess)
             {
                 TempData["success"] = "Email will be proccesses and sent shortly!";
@@ -71,7 +74,7 @@ namespace Mango.Web.Controllers
             return View();
         }
 
-        private async Task<CartDto> LoadCartDtoBasedOnLoggedUser()
+        private async Task<CartDto> LoadCartDtoBasedOnLoggedInUser()
         {
             var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sub)?.FirstOrDefault()?.Value;
             ResponseDto? response = await _cartService.GetCartByUserIdAsync(userId);
