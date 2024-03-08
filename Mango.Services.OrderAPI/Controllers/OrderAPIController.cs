@@ -39,9 +39,13 @@ namespace Mango.Services.OrderAPI.Controllers
                 orderHeaderDto.Status = SD.Status_Pending;
                 orderHeaderDto.OrderDetails = _mapper.Map<IEnumerable<OrderDetailsDto>>(cartDto.CartDetails);
                 //orderHeaderDto.OrderTotal = Math.Round(orderHeaderDto.OrderTotal, 2);
-                OrderHeader orderCreated = _db.OrderHeaders.Add(_mapper.Map<OrderHeader>(orderHeaderDto)).Entity;
+                //OrderHeader orderCreated = _db.OrderHeaders.Add(_mapper.Map<OrderHeader>(orderHeaderDto)).Entity;
 
-                await _db.SaveChangesAsync();
+                //await _db.SaveChangesAsync();
+
+                OrderHeader orderCreated = _mapper.Map<OrderHeader>(orderHeaderDto);
+                _db.OrderHeaders.Add(orderCreated);
+                _db.SaveChanges();
 
                 orderHeaderDto.OrderHeaderId = orderCreated.OrderHeaderId;
                 _response.Result = orderHeaderDto;
@@ -75,7 +79,7 @@ namespace Mango.Services.OrderAPI.Controllers
                     {
                         Coupon = stripeRequestDto.OrderHeader.CouponCode
                     }
-                }
+                };
 
                 foreach (var item in stripeRequestDto.OrderHeader.OrderDetails)
                 {
