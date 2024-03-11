@@ -1,6 +1,6 @@
 ﻿using Mango.Services.RewardAPI.Message;
 
-namespace Mango.Services.EmailAPI.Services
+namespace Mango.Services.RewardAPI.Services
 {
     public interface IRewardService
     {
