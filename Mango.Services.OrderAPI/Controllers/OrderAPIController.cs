@@ -74,8 +74,6 @@ namespace Mango.Services.OrderAPI.Controllers
             {
                 OrderHeader orderHeader = _db.OrderHeaders.Include(u => u.OrderDetails).First(u => u.OrderHeaderId == id);
                 _response.Result = _mapper.Map<OrderHeaderDto>(orderHeader);
-
-
             }
             catch (Exception ex)
             {
