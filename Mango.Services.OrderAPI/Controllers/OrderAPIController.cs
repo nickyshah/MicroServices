@@ -56,7 +56,7 @@ namespace Mango.Services.OrderAPI.Controllers
                         .OrderByDescending(u => u.OrderHeaderId).ToList();
                 }
 
-                _response.Result = _mapper.Map<OrderHeaderDto>(objList);
+                _response.Result = _mapper.Map<IEnumerable<OrderHeaderDto>>(objList);
             }
             catch (Exception ex)
             {
