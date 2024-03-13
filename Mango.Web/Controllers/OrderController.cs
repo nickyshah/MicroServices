@@ -40,7 +40,7 @@ namespace Mango.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll(string status)
         {
             IEnumerable<OrderHeaderDto> list;
             string userId = "";
@@ -54,12 +54,27 @@ namespace Mango.Web.Controllers
             if (response != null && response.IsSuccess)
             {
                 list = JsonConvert.DeserializeObject<List<OrderHeaderDto>>(Convert.ToString(response.Result));
+                switch (status)
+                {
+                    case "approved":
+                        list = list.Where(u => u.Status == SD.Status_Approved);
+                        break;
+                    case "readyforpickup":
+                        list = list.Where(u => u.Status == SD.Status_ReadyForPickUp);
+                        break;
+                    case "cancelled":
+                        list = list.Where(u => u.Status == SD.Status_Cancelled || u.Status == SD.Status_Refunded);
+                        break;
+                    default:
+                        break;
+
+                }
             }
             else
             {
                 list = new List<OrderHeaderDto>();
             }
-            return Json(new { data = list });
+            return Json(new { data = list.OrderByDescending(u => u.OrderHeaderId) });
 
         }
 
