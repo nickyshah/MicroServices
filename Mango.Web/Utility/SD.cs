@@ -27,7 +27,10 @@
         public const string Status_Refunded = "Refunded";
         public const string Status_Cancelled = "Cancelled";
 
-        //public const string RoleAdmin = "ADMIN";
-        //public const string RoleCustomer = "CUSTOMER";
+        public enum ContentType
+        {
+            Json,
+            MultipartFormData,
+        }
     }
 }
