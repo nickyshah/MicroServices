@@ -2,6 +2,7 @@
 using Mango.Web.Models;
 using Mango.Web.Service.IService;
 using Mango.Web.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -60,6 +61,45 @@ namespace Mango.Web.Controllers
             }
             return Json(new { data = list });
 
+        }
+
+        [HttpPost("OrderReadyForPickUp")]
+        [Authorize]
+        public async Task<IActionResult> OrderReadyForPickUp(int orderId)
+        {
+            var response = await _orderService.UpdateOrderStatus(orderId, SD.Status_ReadyForPickUp);
+            if (response != null && response.IsSuccess)
+            {
+                TempData["success"] = "Status Updated Successfully";
+                return RedirectToAction(nameof(OrderDetail), new { orderId = orderId });
+            }
+            return View();
+        }
+
+        [HttpPost("CompleteOrder")]
+        [Authorize]
+        public async Task<IActionResult> CompleteOrder(int orderId)
+        {
+            var response = await _orderService.UpdateOrderStatus(orderId, SD.Status_Completed);
+            if (response != null && response.IsSuccess)
+            {
+                TempData["success"] = "Status Updated Successfully";
+                return RedirectToAction(nameof(OrderDetail), new { orderId = orderId });
+            }
+            return View();
+        }
+
+        [HttpPost("CancelOrder")]
+        [Authorize]
+        public async Task<IActionResult> CancelOrder(int orderId)
+        {
+            var response = await _orderService.UpdateOrderStatus(orderId, SD.Status_Cancelled);
+            if (response != null && response.IsSuccess)
+            {
+                TempData["success"] = "Status Updated Successfully";
+                return RedirectToAction(nameof(OrderDetail), new { orderId = orderId });
+            }
+            return View();
         }
     }
 }

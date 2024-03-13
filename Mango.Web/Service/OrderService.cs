@@ -57,7 +57,7 @@ namespace Mango.Web.Service
             {
                 ApiType = SD.ApiType.POST,
                 Data = newStatus,
-                Url = SD.OrderAPIBase + "/api/order/UpdateOrderStatus" + orderId
+                Url = SD.OrderAPIBase + "/api/order/UpdateOrderStatus/" + orderId
             });
         }
 
