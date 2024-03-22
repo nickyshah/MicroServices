@@ -14,14 +14,17 @@
             <div class="col-12 col-md-6 offset-md-3 pb-2">
                 <div class="input-group">
                     <input asp-for="Password" type="password" id="passwordField" class="form-control" placeholder="Password..." />
-                    <span class="input-group-text" id="toggleButton">
-                        <i id="toggleIcon" class="bi bi-eye"></i>
+                    <span class="input-group-text bg-light" id="toggleButton">
+                        <i id="toggleIcon" class="bi bi-eye text-dark"></i>
                     </span>
                 </div>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="col-12 col-md-6 offset-md-3 pb-2">
-                <button type="submit" class="form-control btn btn-success" value="Submit">Login</button>
+                <div class="text-center">
+                    <button type="submit" class="form-control btn btn-success" value="Submit">Login</button>
+
+                </div>
             </div>
         </div>
     </div>
