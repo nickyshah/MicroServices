@@ -12,7 +12,12 @@
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <div class="col-12 col-md-6 offset-md-3 pb-2">
-                <input asp-for="Password" type="password" class="form-control" placeholder="Password..." />
+                <div class="input-group">
+                    <input asp-for="Password" type="password" id="passwordField" class="form-control" placeholder="Password..." />
+                    <span class="input-group-text" id="toggleButton">
+                        <i id="toggleIcon" class="bi bi-eye"></i>
+                    </span>
+                </div>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="col-12 col-md-6 offset-md-3 pb-2">
@@ -24,4 +29,25 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $("#toggleButton").click(function () {
+                togglePasswordVisibility();
+            });
+        });
+
+        function togglePasswordVisibility() {
+            const passwordField = $("#passwordField");
+            const toggleIcon = $("#toggleIcon");
+
+            if (passwordField.attr("type") === "password") {
+                passwordField.attr("type", "text");
+                toggleIcon.removeClass("bi-eye").addClass("bi-eye-slash");
+            }
+            else {
+                passwordField.attr("type", "password");
+                toggleIcon.removeClass("bi-eye-slash").addClass("bi-eye");
+            }
+        }
+    </script>
 }
